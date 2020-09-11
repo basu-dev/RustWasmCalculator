@@ -1,0 +1,44 @@
+*{
+    margin:0;
+    padding:0;
+
+}
+body{
+    background:#ccc;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.calculator{
+    padding:3px;
+    background:black;
+    color:white;
+    width:400px;
+}
+.calculator .display{
+    height:70px;
+    background:grey;
+    width:100%;
+}
+.calculator .keypad{
+
+    margin-top:10px;
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    
+}
+.calculator .keypad div{
+
+  background:blue;
+  margin:10px;
+  height:70px;
+  width:70px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 2rem;
+}
