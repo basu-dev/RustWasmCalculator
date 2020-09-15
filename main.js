@@ -1,49 +1,77 @@
-var d=document;
-const fillKeypad=()=>{
-    ['1','2','3','C','4','5','6','+','7','8','9','-','/','*','='].forEach(x=>{
-        let div=d.createElement("div");
-        div.id=x;
-        div.innerText=x;
-        div.onclick=_=>btnClicked.call(null,x);
-        d.querySelector(".keypad").appendChild(div);
-    })
+var d = document;
+const fillKeypad = () => {
+  [
+    "1",
+    "2",
+    "3",
+    "C",
+    "4",
+    "5",
+    "6",
+    "+",
+    "7",
+    "8",
+    "9",
+    "-",
+    "/",
+    "*",
+    "=",
+  ].forEach((x) => {
+    let div = d.createElement("div");
+    div.id = x;
+    div.innerText = x;
+    div.onclick = (_) => btnClicked.call(null, x);
+    d.querySelector(".keypad").appendChild(div);
+  });
+};
+let a=0,b=0,result=0,operator='', isSecondArg=false;
+const input=d.querySelector(".inputs"),
+      output=d.querySelector(".outputs");
+const clear=()=>{
+  a=b=0;
+  operator='';
+  isSecondArg=false;
+  result=0;
 }
-let a=0,b=0,operator,result=0;
+const out=(val)=>{
+  return val?output.innerHTML=val:output.innerHTML;
+}
+const inp=(val)=>{
+  return val?input.innerHTML=val:input.innerHTML;
+}
+const printResult=()=>{
+  result=0;
+  switch (operator){
+    case '+':
+      result= a+b;
+      case '-':
+        result= a-b;
+        case '/':
+          result= a/b;
+          case '*':
+            result= a*b;
+  }
+  console.log(a,b,operator,result)
+  // out(result)
+}
 const btnClicked=(val)=>{
-    result=0;
-    let num=parseInt(val);
-    if(isNaN(num)){
-        switch (val){
-            case '+':
-                result= a+b;
-            case '-':
-                result=a-b;
-            case '/':
-                result=a/b;
-            case '*':
-                result =a*b;
-        }
+  let num=parseFloat(val);
+  if(isNaN(num)){
+    val=="C"?clear():(operator=val,isSecondArg=true);
+  }
+  else{
+    input.innerHTML=input.innerHTML+val;
+    console.log(input.innerHTML)
+    if(isSecondArg){
+      b=parseFloat(input.innerHTML);
     }
     else{
-        a=b;
-        b=num;
-        
+      a=parseFloat(input.innerHTML);
     }
-    
+    console.log(`a ${a}, b ${b} result ${result} isArgb ${isSecondArg}`)
+    printResult();
+  }
 }
-const add =()=>{
-    console.log('adding')
-    console.log(a,b);
-    result=a+b;
-    console.log("result",result)
-    b=result;
-};
-const substract=()=>result=a-b;
-const divide=()=>result=a/b;
-const multiply=()=>result=a*b;
-const equal=()=>{
-    JSON.parse(operator+`(1,2)`);
-}
-document.addEventListener('DOMContentLoaded',()=>{
-    fillKeypad();
-})
+document.addEventListener("DOMContentLoaded", () => {
+  fillKeypad();
+});

@@ -15,11 +15,23 @@ body{
     background:black;
     color:white;
     width:400px;
+    border-radius: 7px;
 }
 .calculator .display{
+    display:flex;
+    flex-direction: column;
     height:70px;
-    background:grey;
+    background:rgb(213, 210, 210);
     width:100%;
+}
+.calculator .display .inputs , .calculator .display .outputs{
+    color:black;
+    font-size:1.2em;
+    text-align: end;
+}
+.calculator .top{
+    text-align:center;
+    font-size: 25px;
 }
 .calculator .keypad{
 
